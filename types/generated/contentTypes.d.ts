@@ -806,12 +806,6 @@ export interface ApiBlogBlog extends Schema.CollectionType {
         minLength: 3;
       }>;
     content: Attribute.Blocks;
-    slug: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 3;
-      }>;
     image: Attribute.Media & Attribute.Required;
     author: Attribute.String &
       Attribute.Required &
@@ -823,6 +817,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
       'manyToOne',
       'api::category.category'
     >;
+    slug: Attribute.UID<'api::blog.blog', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -850,6 +845,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
+    category_description: Attribute.Text;
     blogs: Attribute.Relation<
       'api::category.category',
       'oneToMany',

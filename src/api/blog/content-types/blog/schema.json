@@ -20,13 +20,6 @@
     "content": {
       "type": "blocks"
     },
-    "slug": {
-      "type": "string",
-      "regex": "^[^\\s-]+(?:-[^\\s-]+)*$",
-      "required": true,
-      "minLength": 3,
-      "unique": true
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -45,6 +38,10 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "blogs"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

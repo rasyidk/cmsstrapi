@@ -17,6 +17,9 @@
       "required": true,
       "unique": true
     },
+    "category_description": {
+      "type": "text"
+    },
     "blogs": {
       "type": "relation",
       "relation": "oneToMany",
