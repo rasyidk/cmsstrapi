@@ -37,6 +37,7 @@ module.exports = createCoreController("api::blog.blog", ({ strapi }) => ({
     const data = await this.sanitizeOutput(blogs.results, ctx);
     const meta = {
       pagination: blogs.pagination,
+      category: categories.category_name,
     };
     return { data, meta };
   },
