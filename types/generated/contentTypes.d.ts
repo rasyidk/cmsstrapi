@@ -817,7 +817,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
       'manyToOne',
       'api::category.category'
     >;
-    slug: Attribute.UID<'api::blog.blog', 'title'>;
+    slug: Attribute.UID<'api::blog.blog', 'title'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -834,6 +834,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -851,6 +852,8 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'oneToMany',
       'api::blog.blog'
     >;
+    slug: Attribute.UID<'api::category.category', 'category_name'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

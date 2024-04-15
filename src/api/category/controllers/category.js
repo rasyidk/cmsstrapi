@@ -1,34 +1,44 @@
-'use strict'
+"use strict";
 
 /**
  * category controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories
+const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController(
-  'api::category.category',
+  "api::category.category",
   ({ strapi }) => ({
-    async find (ctx) {
-      const { populateBlogs } = ctx.query
+    async find(ctx) {
+      const { populateBlogs } = ctx.query;
+      const { populateAllBlogs } = ctx.query;
 
       const categories = await strapi.db
-        .query('api::category.category')
-        .findMany()
+        .query("api::category.category")
+        .findMany();
 
       if (populateBlogs) {
         for (const category of categories) {
-          category.blogs = await strapi.db.query('api::blog.blog').findMany({
+          category.blogs = await strapi.db.query("api::blog.blog").findMany({
             where: { category: category.id },
             populate: true,
-            limit: 3
-          })
+            limit: 3,
+          });
         }
       }
 
-      const sanitiedCategories = await this.sanitizeOutput(categories, ctx)
+      if (populateAllBlogs) {
+        for (const category of categories) {
+          category.blogs = await strapi.db.query("api::blog.blog").findMany({
+            where: { category: category.id },
+            populate: true,
+          });
+        }
+      }
 
-      return this.transformResponse(sanitiedCategories)
-    }
+      const sanitiedCategories = await this.sanitizeOutput(categories, ctx);
+
+      return this.transformResponse(sanitiedCategories);
+    },
   })
-)
+);
