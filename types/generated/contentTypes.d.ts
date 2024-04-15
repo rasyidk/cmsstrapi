@@ -869,6 +869,69 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiGalleryGallery extends Schema.CollectionType {
+  collectionName: 'galleries';
+  info: {
+    singularName: 'gallery';
+    pluralName: 'galleries';
+    displayName: 'Gallery';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    photo_title: Attribute.String;
+    photo: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::gallery.gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::gallery.gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLayananLayanan extends Schema.CollectionType {
+  collectionName: 'layanans';
+  info: {
+    singularName: 'layanan';
+    pluralName: 'layanans';
+    displayName: 'Layanan';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::layanan.layanan',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::layanan.layanan',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPartnerPartner extends Schema.CollectionType {
   collectionName: 'partners';
   info: {
@@ -921,6 +984,8 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
+      'api::gallery.gallery': ApiGalleryGallery;
+      'api::layanan.layanan': ApiLayananLayanan;
       'api::partner.partner': ApiPartnerPartner;
     }
   }
