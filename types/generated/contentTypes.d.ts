@@ -897,6 +897,40 @@ export interface ApiGalleryGallery extends Schema.CollectionType {
   };
 }
 
+export interface ApiHomePageHomePage extends Schema.SingleType {
+  collectionName: 'home_pages';
+  info: {
+    singularName: 'home-page';
+    pluralName: 'home-pages';
+    displayName: 'Home Page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    navbar_logo: Attribute.Media;
+    hero_carousell: Attribute.Media;
+    hero_content: Attribute.String;
+    about_content: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::home-page.home-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::home-page.home-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLayananLayanan extends Schema.CollectionType {
   collectionName: 'layanans';
   info: {
@@ -981,6 +1015,7 @@ declare module '@strapi/types' {
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
       'api::gallery.gallery': ApiGalleryGallery;
+      'api::home-page.home-page': ApiHomePageHomePage;
       'api::layanan.layanan': ApiLayananLayanan;
       'api::partner.partner': ApiPartnerPartner;
     }
