@@ -12,9 +12,9 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "navbar_logo": {
+    "hero_carousell": {
       "type": "media",
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "allowedTypes": [
         "images",
@@ -22,16 +22,6 @@
         "videos",
         "audios"
       ]
-    },
-    "hero_carousell": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": true
     },
     "hero_content": {
       "type": "string"

@@ -909,7 +909,6 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    navbar_logo: Attribute.Media;
     hero_carousell: Attribute.Media;
     hero_content: Attribute.String;
     about_content: Attribute.String;
@@ -955,6 +954,36 @@ export interface ApiLayananLayanan extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::layanan.layanan',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNavbarNavbar extends Schema.SingleType {
+  collectionName: 'navbars';
+  info: {
+    singularName: 'navbar';
+    pluralName: 'navbars';
+    displayName: 'Navbar';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    navbar_logo: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::navbar.navbar',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::navbar.navbar',
       'oneToOne',
       'admin::user'
     > &
@@ -1017,6 +1046,7 @@ declare module '@strapi/types' {
       'api::gallery.gallery': ApiGalleryGallery;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::layanan.layanan': ApiLayananLayanan;
+      'api::navbar.navbar': ApiNavbarNavbar;
       'api::partner.partner': ApiPartnerPartner;
     }
   }
