@@ -1023,6 +1023,38 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
   };
 }
 
+export interface ApiVideoVideo extends Schema.CollectionType {
+  collectionName: 'videos';
+  info: {
+    singularName: 'video';
+    pluralName: 'videos';
+    displayName: 'video';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    video_title: Attribute.String;
+    video_link: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::video.video',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::video.video',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1048,6 +1080,7 @@ declare module '@strapi/types' {
       'api::layanan.layanan': ApiLayananLayanan;
       'api::navbar.navbar': ApiNavbarNavbar;
       'api::partner.partner': ApiPartnerPartner;
+      'api::video.video': ApiVideoVideo;
     }
   }
 }
