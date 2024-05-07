@@ -19,6 +19,7 @@ module.exports = createCoreController("api::blog.blog", ({ strapi }) => ({
     return this.transformResponse(sanitiedEntity);
   },
 
+  //add command
   async category(ctx) {
     const { slug } = ctx.query;
     let currentPage = parseInt(ctx.query.page) || 1;
